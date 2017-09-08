@@ -1,31 +1,30 @@
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.Scanner;
 
+
 /**
- * Class to implement online phone book using Hash Table Data Structure
- *
+ * Used to Test Binary Search Tree Implementation of the Address Book
  */
-public class AddressBook {
+public class BSTAddressBook {
     public static void main(String[] args) throws IOException {
 
-      HashTable<LList> bucketHash = new HashTable<>(); // initialize a hashtable that has an array of size 13(0-to-12)
+        BinarySearchTree addressSearchTree = new BinarySearchTree();
 
-        try {
-            runTestCases(bucketHash);
-            int l = 0;
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        runTestCases(addressSearchTree);
+
     }
 
+
     /**
-     * Method to run through test cases
-     * @param bucketHash  takes in a BucketHash Data Structure Object which holds the Person entries
-     * @throws IOException
+     * Class to run through test cases of Binary Search Tree implementation of Address Book
+     * @param addressSearchTree the BinarySearch Tree to run
+     * @throws IOException in case of IO error
      */
-    public static void runTestCases(HashTable bucketHash) throws IOException {
+    public static void runTestCases(BinarySearchTree addressSearchTree) throws IOException {
         String action, firstName, lastName, phoneNum, email, currentLine;
-        Person insertPerson;
+        Person insertPerson, deletePerson, lookupPerson;
         Scanner s = null;
 
         try {
@@ -34,17 +33,16 @@ public class AddressBook {
             while (s.hasNextLine()) {
                 action = s.next();
 
-
-                switch (action){
+                switch (action) {
                     case "Insert":
                         firstName = s.next();
                         lastName = s.next();
                         phoneNum = s.next();
                         email = s.next();
-                        insertPerson  = new Person(firstName,lastName,phoneNum,email);
+                        insertPerson = new Person(firstName, lastName, phoneNum, email);
                         System.out.println("**Inserting " + firstName + " " + lastName+"**");
                         insertPerson.printPerson();
-                        bucketHash.add(insertPerson);
+                        addressSearchTree.add(insertPerson);
                         System.out.println("-----------------------------------------------------------" +
                                 "---------------------------------------------------------");
                         break;
@@ -52,25 +50,27 @@ public class AddressBook {
                         firstName = s.next();
                         lastName = s.next();
                         System.out.println("**Deleting " + firstName + " " + lastName+"**");
-                        bucketHash.delete(firstName,lastName);
+                        deletePerson = new Person(firstName, lastName);
+                        addressSearchTree.remove(deletePerson);
                         System.out.println("-----------------------------------------------------------" +
                                 "---------------------------------------------------------");
                         break;
-                    case"Lookup":
+                    case "Lookup":
                         firstName = s.next();
                         lastName = s.next();
                         System.out.println("**Looking up " + firstName + " " + lastName+"**");
-                        Person lookUpPerson = bucketHash.lookUp(firstName,lastName);
+                        lookupPerson = new Person(firstName, lastName);
+                        Person foundPerson = addressSearchTree.bstLookup(lookupPerson);
 
-                        if(lookUpPerson != null)
-                            lookUpPerson.printPerson();
-                        else if(lookUpPerson == null)
-                            System.out.println(firstName+" "+lastName+" not found!");
+                        if (foundPerson != null)
+                            foundPerson.printPerson();
+                        else if (foundPerson == null)
+                            System.out.println(firstName + " " + lastName + " not found!");
                         System.out.println("-----------------------------------------------------------" +
                                 "---------------------------------------------------------");
                         break;
                     default:
-                        if(s.hasNextLine()) currentLine = s.nextLine();
+                        if (s.hasNextLine()) currentLine = s.nextLine();
                         break;
                 }
             }
@@ -79,5 +79,7 @@ public class AddressBook {
                 s.close();
             }
         }
+
+
     }
 }

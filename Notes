@@ -1,3 +1,18 @@
-FirsName + LastName Combination is unique
+Case 1
+BobSmith
+The hash is: -1871745170
+The bucket is: 4
 
-Hash buckets should be implemented with a
+
+
+JaneWilliams
+The hash is: 1433153214
+The bucket is: 12
+
+Mohammedal-Salam
+The hash is: 1651293474
+The bucket is: 12
+
+PatJones
+The hash is: 2019690356
+The bucket is: 8
