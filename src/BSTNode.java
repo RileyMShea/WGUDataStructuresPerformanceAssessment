@@ -1,111 +1,170 @@
-
-
-
-
-
-public class BSTNode<T extends Person>
-{
+/**
+ * Class Implementation of Binary Search Tree Node
+ *
+ * @param <T> generic Type T
+ */
+public class BSTNode<T extends Person> {
     private T data;
     private BSTNode<T> left;
     private BSTNode<T> right;
-    //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
     private BSTNode<T> parent;
-//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
-    public BSTNode()
-    {
+
+    /**
+     * Default Constructor
+     */
+    public BSTNode() {
         this(null); // call next constructor
-    } // end default constructor
+    }
 
-    public BSTNode(T dataPortion)
-    {
+    /**
+     * constructor when just passed the data part of the node
+     *
+     * @param dataPortion data within the node
+     */
+    public BSTNode(T dataPortion) {
         this(dataPortion, null, null); // call next constructor
-    } // end constructor
+    }
 
+    /**
+     * Constructor when passed data left child node and right child node
+     *
+     * @param dataPortion object to hold in node
+     * @param leftChild   node in the left child of this node
+     * @param rightChild  node in right child of this node
+     */
     public BSTNode(T dataPortion, BSTNode<T> leftChild,
-                   BSTNode<T> rightChild)
-    {
-//-		data = dataPortion;
-//-		left = leftChild;
-//-		right = rightChild;
-//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+                   BSTNode<T> rightChild) {
         this(dataPortion, leftChild, rightChild, null); // call next constructor
-//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-    } // end constructor
+    }
 
-
-    //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+    /**
+     * Same as above but with parent node as well
+     *
+     * @param dataPortion object to hold in node
+     * @param leftChild   node in the left child of this node
+     * @param rightChild  node in right child of this node
+     * @param parentNode  sets parent node link
+     */
     public BSTNode(T dataPortion, BSTNode<T> leftChild,
-                   BSTNode<T> rightChild, BSTNode<T> parentNode)
-    {
+                   BSTNode<T> rightChild, BSTNode<T> parentNode) {
         data = dataPortion;
         left = leftChild;
         right = rightChild;
         parent = parentNode;
-    } // end constructor
-//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+    }
 
-    public T getData()
-    {
-        return (T)data;
-    } // end getData
+    /**
+     * Getter for data
+     *
+     * @return data
+     */
+    public T getData() {
+        return data;
+    }
 
-    public void setData(T newData)
-    {
-        data = (T)newData;
-    } // end setData
+    /**
+     * Setter for Data
+     *
+     * @param newData object to set as new data
+     */
+    public void setData(T newData) {
+        data = newData;
+    }
 
-    public BSTNode<T> getLeftChild()
-    {
+    /**
+     * Getter of left child node
+     *
+     * @return left child node
+     */
+    public BSTNode<T> getLeftChild() {
         return left;
-    } // end getLeftChild
+    }
 
-    public void setLeftChild(BSTNode<T>  leftChild)
-    {
-        left = (BSTNode<T>)leftChild;
-    } // end setLeftChild
+    /**
+     * Setter for left Child node
+     *
+     * @param leftChild the node to set as left child
+     */
+    public void setLeftChild(BSTNode<T> leftChild) {
+        left = leftChild;
+    }
 
-    public boolean hasLeftChild()
-    {
+    /**
+     * Determine if this node has a left child
+     *
+     * @return boolean of whether node has child
+     */
+    public boolean hasLeftChild() {
         return left != null;
-    } // end hasLeftChild
+    }
 
-    public BSTNode<T>  getRightChild()
-    {
+    /**
+     * Getter for right Child
+     *
+     * @return the right child node
+     */
+    public BSTNode<T> getRightChild() {
         return right;
-    } // end getRightChild
+    }
 
-    public void setRightChild(BSTNode<T> rightChild)
-    {
-        right = (BSTNode<T>)rightChild;
-    } // end setRightChild
+    /**
+     * Setter for the right child of this node
+     *
+     * @param rightChild the node to set as the right child of this node
+     */
+    public void setRightChild(BSTNode<T> rightChild) {
+        right = rightChild;
+    }
 
-    public boolean hasRightChild()
-    {
+    /**
+     * Check if this this node has a right child
+     *
+     * @return boolean node has right child?
+     */
+    public boolean hasRightChild() {
         return right != null;
-    } // end hasRightChild
+    }
 
-    public boolean isLeaf()
-    {
+    /**
+     * Check if this node is a leaf
+     *
+     * @return boolean isLeaf
+     */
+    public boolean isLeaf() {
         return (left == null) && (right == null);
-    } // end isLeaf
+    }
 
-    public int getHeight()
-    {
+    /**
+     * Public Getter for height
+     *
+     * @return private get height value
+     */
+    public int getHeight() {
         return getHeight(this); // call private getHeight
-    } // end getHeight
+    }
 
-    private int getHeight(BSTNode<T> node)
-    {
+    /**
+     * Private getter for Height
+     *
+     * @param node Node to determine height of
+     * @return the height of the node
+     */
+    private int getHeight(BSTNode<T> node) {
         int height = 0;
         if (node != null)
             height = 1 + Math.max(getHeight(node.left),
                     getHeight(node.right));
         return height;
-    } // end getHeight
+    }
 
-    public int getNumberOfNodes()
-    {
+    /**
+     * Getter for number of nodes
+     *
+     * @return the number of nodes
+     */
+    public int getNumberOfNodes() {
         int leftNumber = 0;
         int rightNumber = 0;
 
@@ -116,87 +175,94 @@ public class BSTNode<T extends Person>
             rightNumber = right.getNumberOfNodes();
 
         return 1 + leftNumber + rightNumber;
-    } // end getNumberOfNodes
+    }
 
-
-    public BSTNode<T> copy()
-    {
+    public BSTNode<T> copy() {
         BSTNode<T> newRoot = new BSTNode<T>(data);
         if (left != null)
-//-            newRoot.left = (BSTNode<T>) left.copy();
-//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-            newRoot.left = (BSTNode<T>) left.copy(newRoot);
-//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+            newRoot.left = left.copy(newRoot);
         if (right != null)
-//-            newRoot.right = (BSTNode<T>) right.copy();
-//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-            newRoot.right = (BSTNode<T>) right.copy(newRoot);
-//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+            newRoot.right = right.copy(newRoot);
 
-//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
         newRoot.parent = parent;
-//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
         return newRoot;
-    } // end copy
+    }
 
-
-    //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-    public BSTNode<T> copy(BSTNode<T> p)
-    {
+    public BSTNode<T> copy(BSTNode<T> p) {
         BSTNode<T> newRoot = new BSTNode<T>(data);
         if (left != null)
-            newRoot.left = (BSTNode<T>) left.copy(newRoot);
+            newRoot.left = left.copy(newRoot);
         if (right != null)
-            newRoot.right = (BSTNode<T>) right.copy(newRoot);
+            newRoot.right = right.copy(newRoot);
 
         newRoot.parent = p;
         return newRoot;
-    } // end copy
+    }
 
 
-    public BSTNode<T>  getParent()
-    {
+    /**
+     * getter for Parent node of this node
+     *
+     * @return parent node of this node
+     */
+    public BSTNode<T> getParent() {
         return parent;
-    } // end getParent
+    }
 
-    public void setParent(BSTNode<T>  p)
-    {
-        parent = (BSTNode<T>) p;
-    } // end setParent
+    /**
+     * Setter for the parent of this node
+     *
+     * @param p the node to set as the parent
+     */
+    public void setParent(BSTNode<T> p) {
+        parent = p;
+    }
 
-    public boolean hasParent()
-    {
+    /**
+     * Determine if this node as a parent
+     *
+     * @return boolean hasParent
+     */
+    public boolean hasParent() {
         return parent != null;
-    } // end hasParent
-//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+    }
+
 
     /**
      * Determines if a particular person object exists in a Tree
-      * @param data the person to search for
+     *
+     * @param data the person to search for
      * @return true/false whether the person exists
      */
-public boolean search(T data) {
-    if (data.compareTo(this.data) == 0)
-        return true;
-    else if (data.compareTo(this.data) < 0) {
-        if (left == null)
-            return false;
-        else
-            return left.search(data);
-    } else if (data.compareTo(this.data) > 0) {
-        if (right == null)
-            return false;
-        else
-            return right.search(data);
+    public boolean search(T data) {
+        if (data.compareTo(this.data) == 0)
+            return true;
+        else if (data.compareTo(this.data) < 0) {
+            if (left == null)
+                return false;
+            else
+                return left.search(data);
+        } else if (data.compareTo(this.data) > 0) {
+            if (right == null)
+                return false;
+            else
+                return right.search(data);
+        }
+        return false;
     }
-    return false;
-}
 
+    /**
+     * Will lookUp a particular Person in the Binary Search Tree by comparing data in the data portion of BSTNode
+     *
+     * @param data the Data to compare against the data in this node
+     * @return the matching person object in the BST if found, otherwise null.
+     */
     public Person lookUp(T data) {
-        if(this.search(data)) {
+        if (this.search(data)) {
 
             if (data.compareTo(this.data) == 0)
-                return (Person) this.data;
+                return this.data;
             else if (data.compareTo(this.data) < 0) {
                 if (left == null)
                     return null;
@@ -214,5 +280,4 @@ public boolean search(T data) {
     }
 
 
-
-} // end BSTNode
+}

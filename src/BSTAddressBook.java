@@ -19,10 +19,11 @@ public class BSTAddressBook {
 
     /**
      * Class to run through test cases of Binary Search Tree implementation of Address Book
+     *
      * @param addressSearchTree the BinarySearch Tree to run
      * @throws IOException in case of IO error
      */
-    public static void runTestCases(BinarySearchTree addressSearchTree) throws IOException {
+    private static void runTestCases(BinarySearchTree addressSearchTree) throws IOException {
         String action, firstName, lastName, phoneNum, email, currentLine;
         Person insertPerson, deletePerson, lookupPerson;
         Scanner s = null;
@@ -40,7 +41,7 @@ public class BSTAddressBook {
                         phoneNum = s.next();
                         email = s.next();
                         insertPerson = new Person(firstName, lastName, phoneNum, email);
-                        System.out.println("**Inserting " + firstName + " " + lastName+"**");
+                        System.out.println("**Inserting " + firstName + " " + lastName + "**");
                         insertPerson.printPerson();
                         addressSearchTree.add(insertPerson);
                         System.out.println("-----------------------------------------------------------" +
@@ -49,7 +50,7 @@ public class BSTAddressBook {
                     case "Delete":
                         firstName = s.next();
                         lastName = s.next();
-                        System.out.println("**Deleting " + firstName + " " + lastName+"**");
+                        System.out.println("**Deleting " + firstName + " " + lastName + "**");
                         deletePerson = new Person(firstName, lastName);
                         addressSearchTree.remove(deletePerson);
                         System.out.println("-----------------------------------------------------------" +
@@ -58,7 +59,7 @@ public class BSTAddressBook {
                     case "Lookup":
                         firstName = s.next();
                         lastName = s.next();
-                        System.out.println("**Looking up " + firstName + " " + lastName+"**");
+                        System.out.println("**Looking up " + firstName + " " + lastName + "**");
                         lookupPerson = new Person(firstName, lastName);
                         Person foundPerson = addressSearchTree.bstLookup(lookupPerson);
 
